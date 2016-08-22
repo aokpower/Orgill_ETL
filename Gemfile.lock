@@ -19,6 +19,7 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
+    kiba (0.6.1)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -33,6 +34,9 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-doc (0.9.0)
+      pry (~> 0.9)
+      yard (~> 0.8)
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
@@ -53,6 +57,7 @@ GEM
     shellany (0.0.1)
     slop (3.6.0)
     thor (0.19.1)
+    yard (0.9.0)
 
 PLATFORMS
   ruby
@@ -60,7 +65,11 @@ PLATFORMS
 DEPENDENCIES
   guard
   guard-rspec
+  kiba
+  pry
+  pry-doc
   rspec
+  yard
 
 BUNDLED WITH
    1.12.5
