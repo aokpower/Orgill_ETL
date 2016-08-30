@@ -16,6 +16,8 @@ def use_tmp_file(content = 'foo', &block)
   file.unlink
 end
 
+short_data = "foo~   bar ~ baz ~\r\nboo~ ~biz"
+
 RSpec.describe LegSource do
   context 'kiba source api methods' do
     context 'initialize' do
@@ -60,18 +62,28 @@ RSpec.describe LegSource do
           end
         end
       end
+
+      context 'parsing' do
+        it 'detabularizes with no map' do
+          actual   = LegSource.parse(short_data)
+          expected = [['foo', 'bar', 'baz'], ['boo', '', 'biz']]
+          expect(actual).to eq expected
+        end
+
+        it 'can take an index map' do
+          test_map = { 0 => 'one', 1 => 'two', 2 => 'three' }
+          expected = [
+            { 'one' => 'foo', 'two' => 'bar', 'three' => 'baz'},
+            { 'one' => 'boo', 'two' => '', 'three' => 'biz'}
+          ]
+          actual = LegSource.parse(short_data, index_map: test_map)
+          expect(actual).to eq expected
+        end
+      end
     end
 
     context 'each' do
     end
   end
 
-  # context 'de-tabularizing' do
-  #   it 'transforms tabular string data to arrays of arrays' do
-  #     pending
-  #     data = "foo~   bar ~ baz ~\r\nboo~ ~biz"
-  #     this = Orgill::Extractor.tabularize_string(data)
-  #     expect(this).to eq [['foo', 'bar', 'baz'], ['boo', '', 'biz']]
-  #   end
-  # end
 end

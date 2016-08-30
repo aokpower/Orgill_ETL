@@ -3,13 +3,29 @@ module Orgill
     class LegSource
       attr_reader :products, :source
 
+      def self.detabularize(string)
+        string
+          .split("\r\n") # split products
+          .map { |row| row.split(/\s*~\s*/) } # split product fields
+      end
+
+      def self.parse(string, index_map: nil)
+        detabularize(string).map do |row|
+          unless index_map.nil?
+            Hash[row.each_with_index.map { |val, ind| [index_map[ind], val] }]
+          else
+            row
+          end
+        end
+      end
+
       def initialize(data: nil, file: nil)
         raise(ArgumentError) if file.nil? && data.nil? # if no arguments
         raise(ArgumentError) if !file.nil? && !data.nil? # if too many sources
 
         # converge source once it is to string level
-        @source = data || File.read(file)
-        @products = @source
+        @source   = data || File.read(file)
+        @products = self.class.parse(@source)
       end
     end
   end
