@@ -3,13 +3,13 @@ module Orgill
     class LegSource
       attr_reader :products
 
-      def initialize(input_data: nil, input_file: nil)
+      def initialize(data: nil, file: nil)
         # fail if no arguments
-        fail(ArgumentError) if input_file.nil? && input_data.nil?
+        fail(ArgumentError) if file.nil? && data.nil?
         # fail if too many sources
-        fail(ArgumentError) if !input_file.nil? && !input_data.nil?
+        fail(ArgumentError) if !file.nil? && !data.nil?
 
-        @products = input_data || input_file
+        @products = data || file
       end
     end
   end
