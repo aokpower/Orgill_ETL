@@ -38,6 +38,11 @@ RSpec.describe LegSource do
               expect(actual).to_not be_nil
             end
           end
+
+          it 'index_map' do
+            expect { LegSource.new(data: short_data, index_map: {}) }
+              .to_not raise_error
+          end
         end
       end
 
