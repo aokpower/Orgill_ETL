@@ -22,20 +22,21 @@ RSpec.describe LegSource do
   context 'kiba source api methods' do
     context 'initialize' do
       context 'accepts' do
-        # basically input tests
-        it 'data only' do
-          # I don't want to worry about file reading logic when I'm
-          # just trying to test internal plumbing.
-          actual = LegSource.new(data: 'foo').products
-          # TODO: replace with something better than a nil check!
-          expect(actual).to_not be_nil
-        end
-
-        it 'file only' do
-          # verbose name for debugging purposes
-          use_tmp_file do |file|
-            actual = LegSource.new(file: file.path).products
+        context 'sources' do
+          it 'data only' do
+            # I don't want to worry about file reading logic when I'm
+            # just trying to test internal plumbing.
+            actual = LegSource.new(data: 'foo').products
+            # TODO: replace with something better than a nil check!
             expect(actual).to_not be_nil
+          end
+
+          it 'file only' do
+            # verbose name for debugging purposes
+            use_tmp_file do |file|
+              actual = LegSource.new(file: file.path).products
+              expect(actual).to_not be_nil
+            end
           end
         end
       end
@@ -55,8 +56,7 @@ RSpec.describe LegSource do
     end
 
     context 'each' do
-      it 'yields products' do
-      end
+      it 'yields products'
     end
 
     context 'file:' do
@@ -88,5 +88,4 @@ RSpec.describe LegSource do
       expect(actual).to eq expected
     end
   end
-
 end
