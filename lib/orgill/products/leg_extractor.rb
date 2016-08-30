@@ -4,10 +4,8 @@ module Orgill
       attr_reader :products
 
       def initialize(data: nil, file: nil)
-        # fail if no arguments
-        fail(ArgumentError) if file.nil? && data.nil?
-        # fail if too many sources
-        fail(ArgumentError) if !file.nil? && !data.nil?
+        raise(ArgumentError) if file.nil? && data.nil? # if no arguments
+        raise(ArgumentError) if !file.nil? && !data.nil? # if too many sources
 
         @products = data || file
       end
