@@ -45,8 +45,11 @@ RSpec.describe LegSource do
         end
 
         it 'both data and file' do
-          expect { LegSource.new(data: 'foo', file: 'foo.txt') }
-            .to raise_error(ArgumentError)
+          use_tmp_file do |file|
+            file.write 'foo'
+            expect { LegSource.new(data: 'foo', file: file.path) }
+              .to raise_error(ArgumentError)
+          end
         end
       end
     end
