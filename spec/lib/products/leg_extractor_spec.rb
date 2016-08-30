@@ -7,12 +7,12 @@ LegSource = Orgill::Products::LegSource # For brevity's sake
 # Any module -> class translation issues?
 # Don't forget yard docs!
 
-# helper method to take care of temporary file allocation/deletion
-# use |file| file.write to insert content
-def use_tmp_file(&block)
+# helper method to take care of temporary file allocation/writes/deletion
+def use_tmp_file(content = 'foo', &block)
   file = Tempfile.new('orgill_etl_leg_source_tmp')
-  yield file
+  file.write(content)
   file.close
+  yield file
   file.unlink
 end
 
@@ -32,7 +32,6 @@ RSpec.describe LegSource do
         it 'file only' do
           # verbose name for debugging purposes
           use_tmp_file do |file|
-            file.write 'foo'
             actual = LegSource.new(file: file.path).products
             expect(actual).to_not be_nil
           end
@@ -46,7 +45,6 @@ RSpec.describe LegSource do
 
         it 'both data and file' do
           use_tmp_file do |file|
-            file.write 'foo'
             expect { LegSource.new(data: 'foo', file: file.path) }
               .to raise_error(ArgumentError)
           end
