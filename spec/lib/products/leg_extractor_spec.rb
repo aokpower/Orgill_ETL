@@ -50,6 +50,16 @@ RSpec.describe LegSource do
           end
         end
       end
+
+      context 'file:' do
+        it 'reads file into @source as a string' do
+          content = 'foo'
+          use_tmp_file(content) do |file|
+            actual = LegSource.new(file: file).source
+            expect(actual).to eq content
+          end
+        end
+      end
     end
 
     context 'each' do

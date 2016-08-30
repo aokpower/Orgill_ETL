@@ -1,13 +1,15 @@
 module Orgill
   module Products
     class LegSource
-      attr_reader :products
+      attr_reader :products, :source
 
       def initialize(data: nil, file: nil)
         raise(ArgumentError) if file.nil? && data.nil? # if no arguments
         raise(ArgumentError) if !file.nil? && !data.nil? # if too many sources
 
-        @products = data || file
+        # converge source once it is to string level
+        @source = data || File.read(file)
+        @products = @source
       end
     end
   end
