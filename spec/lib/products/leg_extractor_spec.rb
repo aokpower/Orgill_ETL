@@ -61,7 +61,11 @@ RSpec.describe LegSource do
     end
 
     context 'each' do
-      it 'yields products'
+      it 'yields products' do
+        actual = []
+        LegSource.new(data: short_data).each { |p| actual << p }
+        expect(actual.size).to eq 2
+      end
     end
 
     context 'file:' do

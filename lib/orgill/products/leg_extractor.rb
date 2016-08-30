@@ -22,6 +22,10 @@ module Orgill
         @products = self.class.parse(@source, index_map: index_map)
       end
 
+      def each
+        @products.each { |p| yield(p) }
+      end
+
       private
 
       def self.detabularize(string)
