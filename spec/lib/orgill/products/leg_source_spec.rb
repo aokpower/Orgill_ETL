@@ -1,4 +1,4 @@
-require_relative '../../../lib/orgill/products/leg_extractor'
+require_relative '../../../../lib/orgill/products/leg_source'
 require 'tempfile'
 
 LegSource = Orgill::Products::LegSource # For brevity's sake
