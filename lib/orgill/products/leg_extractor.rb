@@ -13,6 +13,7 @@ module Orgill
       # @example
       #   Orgill::Products::LegSource.parse("foo~   bar ~ baz ~\r\nboo~ ~biz")
       #     #=> [['foo', 'bar', 'baz'], ['boo', '', 'biz']]
+      # @see detabularize
       def self.parse(string, index_map: nil)
         detabularize(string).map do |row|
           unless index_map.nil?
@@ -44,9 +45,12 @@ module Orgill
 
         private
 
-        def detabularize(string)
+        # @param row_seperator [String] "\r\n" by default.
+        #   Try changing this to "\n" if you are having problems
+        def detabularize(string, row_separator = "\r\n")
+          # Orgill uses a tilda ('~') delimited 'spreadsheet' sort of file.
           string
-            .split("\r\n") # split products
+            .split(row_separator) # split products
             .map { |row| row.split(/\s*~\s*/) } # split product fields
         end
       end
