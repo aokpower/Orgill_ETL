@@ -17,7 +17,6 @@ module Orgill
         raise(ArgumentError) if file.nil? && data.nil? # if no arguments
         raise(ArgumentError) if !file.nil? && !data.nil? # if too many sources
 
-        # converge source once it is to string level
         @source   = data || File.read(file)
         @products = self.class.parse(@source, index_map: index_map)
       end
