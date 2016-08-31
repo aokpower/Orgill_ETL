@@ -21,16 +21,20 @@ module Orgill
         @products = self.class.parse(@source, index_map: index_map)
       end
 
+      # @note Required for usage as a kiba source
       def each
         @products.each { |p| yield(p) }
       end
 
-      private
+      class << self
 
-      def self.detabularize(string)
-        string
-          .split("\r\n") # split products
-          .map { |row| row.split(/\s*~\s*/) } # split product fields
+        private
+
+        def detabularize(string)
+          string
+            .split("\r\n") # split products
+            .map { |row| row.split(/\s*~\s*/) } # split product fields
+        end
       end
     end
   end
