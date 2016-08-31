@@ -1,12 +1,7 @@
 # frozen_string_literal: true
-# A sample Gemfile
 source 'https://rubygems.org'
 
 gem 'kiba'
-
-group :test do
-  gem 'rspec'
-end
 
 group :development do
   gem 'yard'
@@ -14,4 +9,8 @@ group :development do
   gem 'guard'
   gem 'pry'
   gem 'pry-doc'
+end
+
+group :test, :development do
+  gem 'rspec'
 end
