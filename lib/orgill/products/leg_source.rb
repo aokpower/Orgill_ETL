@@ -37,6 +37,7 @@ module Orgill
       end
 
       # @note Required for usage as a kiba source
+      # @return [Enumerator]
       def each
         @products.each { |p| yield(p) }
       end
