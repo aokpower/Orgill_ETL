@@ -45,7 +45,7 @@ module Orgill
 
         private
 
-        # @param row_seperator [String] "\r\n" by default.
+        # @param row_separator [String] "\r\n" by default.
         #   Try changing this to "\n" if you are having problems
         def detabularize(string, row_separator = "\r\n")
           # Orgill uses a tilda ('~') delimited 'spreadsheet' sort of file.
