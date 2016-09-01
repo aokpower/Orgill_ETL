@@ -41,6 +41,12 @@ module Orgill
         @products.each { |p| yield(p) }
       end
 
+      # Alias for @products
+      # @return [Array] returns @products
+      def to_a
+        @products
+      end
+
       class << self
 
         private
