@@ -3,7 +3,7 @@ require_relative '../../lib/image_transform.rb'
 RSpec.describe ImageTransform do
   # context 'get image file' do
   #   it 'gets ftp location'
-  #   it 'downloads file'
+  #   it 'downloads file from ftp'
   # end
 
   # context 'upload image, get public link' do
