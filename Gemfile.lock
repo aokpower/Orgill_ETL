@@ -4,6 +4,7 @@ GEM
     awesome_print (1.7.0)
     coderay (1.1.1)
     diff-lcs (1.2.5)
+    dotenv (2.1.1)
     ffi (1.9.14)
     formatador (0.2.5)
     guard (2.14.0)
@@ -66,6 +67,7 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
+  dotenv
   guard
   guard-rspec
   kiba
