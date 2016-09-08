@@ -3,7 +3,7 @@ Dotenv.load
 
 module Orgill
   class FTP
-    #extend Orgill::Products::FTPImageHelper # why unintialized constant error?
+    # extend Orgill::Products::FTPImageHelper # why unintialized constant error?
 
     Base_URL  = 'ftp.orgill.com'.freeze
     Base_Path = '/orgillftp/webfiles'.freeze
