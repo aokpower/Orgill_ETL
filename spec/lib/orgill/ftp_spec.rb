@@ -15,28 +15,39 @@ RSpec.describe FTPAddresses do
     it 'has base path' do
       expect(FTPAddresses::Base_Path).to eq '/orgillftp/webfiles'
     end
-  end
 
-  context '#pick_latest_folder' do
-    it 'can pick most recent image folder from list' do
-      # orgill has images organized like so:
-      # images/week29/*.JPG
-      # this the "week*" folder is changed periodically, so We will need to
-      # request directory contents and match the latest folder, either through
-      # a regex, or through folder modification dates.
+    context '#pick_latest_folder' do
+      it 'can pick most recent image folder from list' do
+        # orgill has images organized like so:
+        # images/week29/*.JPG
+        # this the "week*" folder is changed periodically, so We will need to
+        # request directory contents and match the latest folder, either through
+        # a regex, or through folder modification dates.
 
-      folder_list = %w(
-        Foox.xzf
-        Week28
-        Week29
-        Week32
-        Week30
-        Week31
-      )
+        folder_list = %w(
+          Foox.xzf
+          Week28
+          Week29
+          Week32
+          Week30
+          Week31
+        )
 
-      actual = FTPAddresses.pick_latest_folder(folder_list)
-      expect(actual).to eq 'Week32'
+        actual = FTPAddresses.pick_latest_folder(folder_list)
+        expect(actual).to eq 'Week32'
+      end
+
+      it 'returns nil if no appropriate folder' do
+        folder_list = ['Foo.xzf']
+
+        actual = FTPAddresses.pick_latest_folder(folder_list)
+        expect(actual).to be_nil
+        actual_empty = FTPAddresses.pick_latest_folder([])
+        expect(actual_empty).to be_nil
+      end
     end
+  end
+end
 
     it 'returns nil if no appropriate folder' do
       folder_list = ['Foo.xzf']
