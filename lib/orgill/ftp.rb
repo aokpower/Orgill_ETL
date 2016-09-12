@@ -22,7 +22,9 @@ end
 module Orgill
   # Use Orgilll's FTP server.
   class FTP
-    extend Orgill::FTPAddresses
+    include Orgill::FTPAddresses
+
+    attr_reader :ftp
 
     def initialize
       @login = {
