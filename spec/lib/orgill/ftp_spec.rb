@@ -49,14 +49,25 @@ RSpec.describe FTPAddresses do
   end
 end
 
-    it 'returns nil if no appropriate folder' do
-      folder_list = ['Foo.xzf']
 
-      actual = FTPAddresses.pick_latest_folder(folder_list)
-      expect(actual).to be_nil
-      actual_empty = FTPAddresses.pick_latest_folder([])
-      expect(actual_empty).to be_nil
-    end
+RSpec.describe Orgill::FTP do
+  # Can't use VCR to mock ftp requests :( ...
+  # yet. https://github.com/vcr/vcr/issues/589
+
+  before(:each) do
+    @ftp = Orgill::FTP.new
   end
 
+  after(:each) do
+    @ftp.close
+  end
+
+  it 'can pwd (sanity test)' do
+    expect(@ftp.ftp.pwd).to eq '/'
+  end
+
+  context '#cd_images' do
+    it 'changes folder to current image folder' do
+    end
+  end
 end
