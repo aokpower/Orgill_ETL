@@ -59,5 +59,4 @@ end
     end
   end
 
-  # TODO: add VCR integration_test for this.
 end

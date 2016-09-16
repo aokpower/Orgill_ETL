@@ -1,5 +1,4 @@
 require 'webmock/rspec'
-require 'vcr'
 
 WebMock.disable_net_connect!(allow_localhost: true)
 
@@ -53,9 +52,4 @@ RSpec.configure do |config|
   # test failures related to randomization by passing the same `--seed` value
   # as the one that triggered the failure.
   Kernel.srand config.seed
-
-  VCR.configure do |c|
-    c.cassette_library_dir = 'spec/vcr'
-    c.hook_into :webmock
-  end
 end
