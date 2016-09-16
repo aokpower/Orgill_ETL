@@ -41,5 +41,9 @@ module Orgill
     def close
       ftp.close
     end
+
+    def pwd
+      ftp.pwd
+    end
   end
 end

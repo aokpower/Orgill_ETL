@@ -63,7 +63,7 @@ RSpec.describe Orgill::FTP do
   end
 
   it 'can pwd (sanity test)' do
-    expect(@ftp.ftp.pwd).to eq '/'
+    expect(@ftp.pwd).to eq '/'
   end
 
   context '#cd_images' do
