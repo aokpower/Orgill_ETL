@@ -1,5 +1,7 @@
-require 'dotenv'
 require 'net/ftp'
+require 'forwardable'
+require 'dotenv'
+
 Dotenv.load
 
 module Orgill
@@ -19,12 +21,14 @@ module Orgill
   end
 end
 
-# TODO change close and other wrapped ftp methods to use forwardable
-
 module Orgill
   # Use Orgill's FTP server.
   class FTP
+    # Should this inherit from Net::FTP?
+    extend Forwardable
     include Orgill::FTPAddresses
+
+    def_delegators :ftp, :pwd, :close
 
     attr_reader :ftp
 
@@ -36,14 +40,6 @@ module Orgill
       @ftp = Net::FTP.new(Base_URL).tap do |ftp|
         ftp.login(@login[:username], @login[:password])
       end
-    end
-
-    def close
-      ftp.close
-    end
-
-    def pwd
-      ftp.pwd
     end
   end
 end
