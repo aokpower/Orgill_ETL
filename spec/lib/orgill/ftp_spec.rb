@@ -68,6 +68,8 @@ RSpec.describe Orgill::FTP do
 
   context '#cd_images' do
     it 'changes folder to current image folder' do
+      contains_png = @ftp.chdir_image_folder.ls.any? { |f| f.include?('.jpg') }
+      expect(contains_png).to_not be_nil
     end
   end
 end
