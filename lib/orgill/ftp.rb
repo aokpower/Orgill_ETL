@@ -33,7 +33,7 @@ module Orgill
     extend Forwardable
     include Orgill::FTPAddresses
 
-    def_delegators :ftp, :pwd, :close, :ls
+    def_delegators :ftp, :pwd, :close
 
     attr_reader :ftp
 
