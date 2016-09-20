@@ -47,14 +47,20 @@ module Orgill
       end
     end
 
+    # Wrapper method for Net::FTP.ls. Parses 'ls -l' style file listings into
+    # just file names.
+    # @note this may not work with filenames using escaped whitespace.
+    # @return [Array[String]] list of file names
+    def ls
+      ftp.ls.map { |f| f.split(/\s+/).last } # folder names need parsing
+    end
+
     # Changes current directory to the latest image folder.
     # @return [self]
     # @see Orgill::FTPAddresses.pick_latest_folder
     def chdir_image_folder
       ftp.chdir(Image_Folder)
-      image_folders = ftp.ls
-      image_folder = Orgill::FTPAddresses.pick_latest_folder(image_folders)
-        .split(/\s+/).last # ftp#ls folder names need to be parsed
+      image_folder = Orgill::FTPAddresses.pick_latest_folder(ls)
       ftp.chdir(image_folder)
       self
     end
