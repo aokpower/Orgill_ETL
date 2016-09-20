@@ -7,8 +7,8 @@ Dotenv.load
 module Orgill
   module FTPAddresses
 
-    Base_URL  = 'ftp.orgill.com'.freeze
-    Base_Path = '/orgillftp/webfiles'.freeze
+    Base_URL     = 'ftp.orgill.com'.freeze
+    Base_Path    = '/orgillftp/webfiles'.freeze
     Image_Folder = (Base_Path + '/WebImages').freeze
 
     # @param folder_list [Array[String]]
