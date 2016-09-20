@@ -30,9 +30,9 @@ module Orgill
   # Use Orgill's FTP server.
   class FTP
     # Should this inherit from Net::FTP?
-    extend Forwardable
     include Orgill::FTPAddresses
 
+    extend Forwardable
     def_delegators :ftp, :pwd, :close
 
     attr_reader :ftp
