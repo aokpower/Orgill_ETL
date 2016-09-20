@@ -5,15 +5,19 @@ require 'dotenv'
 Dotenv.load
 
 module Orgill
+  # Location and navigation info about Orgill's FTP folders.
   module FTPAddresses
 
     Base_URL     = 'ftp.orgill.com'.freeze
     Base_Path    = '/orgillftp/webfiles'.freeze
     Image_Folder = (Base_Path + '/WebImages').freeze
 
-    # @param folder_list [Array[String]]
+    # Picks the element matching the format /week(d+)/ where the week number
+    # is highest.
+    # @param folder_list [Array[String]] list of folder and/or file names.
     # @return [String] name of most recent folder
-    # @note this is for use with the web images folder
+    # @note This is for use in the Image_Folder
+    # @see Image_Folder
     def self.pick_latest_folder(folder_list)
       folder_list.select { |f_name| f_name[/week\d+/i] }
       .sort_by { |f_name| /week(\d+)/i.match(f_name).captures[0] }
@@ -43,6 +47,9 @@ module Orgill
       end
     end
 
+    # Changes current directory to the latest image folder.
+    # @return [self]
+    # @see Orgill::FTPAddresses.pick_latest_folder
     def chdir_image_folder
       ftp.chdir(Image_Folder)
       image_folders = ftp.ls
