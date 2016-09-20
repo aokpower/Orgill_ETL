@@ -56,6 +56,7 @@ module Orgill
     # @note this may not work with filenames using escaped whitespace.
     # @return [Array[String]] list of file names
     def ls
+      # TODO: Add test for filename with escaped whitespace
       ftp.ls.map { |f| f.split(/\s+/).last } # folder names need parsing
     end
 
