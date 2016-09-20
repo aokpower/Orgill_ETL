@@ -72,4 +72,30 @@ RSpec.describe Orgill::FTP do
       expect(contains_png).to_not be_nil
     end
   end
+
+  context '#get_image' do
+    # This shouldn't need the user to call #chdir_images first
+    context 'fails when:' do
+      it 'filename doesn\'t exist' do
+        expect { @ftp.get_image("doesnt_exist.txt") }
+          .to raise_error(Orgill::FTPFileNotFoundError)
+      end
+
+      it 'given an invalid filename' do
+        expect { @ftp.get_image("|<.txt") }
+          .to raise_error(Orgill::FTPInvalidFilename)
+      end
+      
+      # it 'output file already exists' # not sure how to test this
+    end
+
+    context 'when successful', :pending do
+      it 'successfully grabs and writes good files' do
+        @ftp.get_image('4138392.jpg')
+        # TEARDOWN IMG FILE BY DELETING
+      end
+
+      # it 'can output to specified file'
+    end
+  end
 end

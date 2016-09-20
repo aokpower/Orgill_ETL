@@ -27,6 +27,10 @@ module Orgill
 end
 
 module Orgill
+  class FTPProtoError < StandardError; end
+  class FTPFileNotFoundError < FTPProtoError; end
+  class FTPInvalidFilename < FTPProtoError; end
+
   # Use Orgill's FTP server.
   class FTP
     # Should this inherit from Net::FTP?
@@ -63,6 +67,20 @@ module Orgill
       image_folder = Orgill::FTPAddresses.pick_latest_folder(ls)
       ftp.chdir(image_folder)
       self
+    end
+
+    def get_image(image_name)
+      unless is_valid_filename?(image_name)
+        raise FTPInvalidFilename
+      else
+        raise FTPFileNotFoundError
+      end
+    end
+
+    private
+
+    def is_valid_filename?(filename)
+      !filename.match(/[\x00\/\\:\*\?\"<>\|]/)
     end
   end
 end
