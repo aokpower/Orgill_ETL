@@ -81,7 +81,7 @@ module Orgill
     private
 
     def is_valid_filename?(filename)
-      # WARN: Regex is for ntfs filenames, but should work ok here.
+      # WARN: Regex is for invalid ntfs filenames, but should work ok here.
       !filename.match(/[\x00\/\\:\*\?\"<>\|]/)
     end
   end
