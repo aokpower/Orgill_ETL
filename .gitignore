@@ -1,2 +1,6 @@
 # ignore ign folder
 ign
+.yardoc
+doc
+.env
+doesnt_exist.txt

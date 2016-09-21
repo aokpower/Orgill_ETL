@@ -1,8 +1,10 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    awesome_print (1.7.0)
     coderay (1.1.1)
     diff-lcs (1.2.5)
+    dotenv (2.1.1)
     ffi (1.9.14)
     formatador (0.2.5)
     guard (2.14.0)
@@ -37,6 +39,7 @@ GEM
     pry-doc (0.9.0)
       pry (~> 0.9)
       yard (~> 0.8)
+    rake (11.2.2)
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
@@ -63,13 +66,16 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
+  dotenv
   guard
   guard-rspec
   kiba
   pry
   pry-doc
+  rake
   rspec
   yard
 
 BUNDLED WITH
-   1.12.5
+   1.13.1
