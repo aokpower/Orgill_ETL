@@ -83,7 +83,7 @@ RSpec.describe Orgill::FTP do
 
       it 'given an invalid filename' do
         expect { @ftp.get_image("|<.txt") }
-          .to raise_error(Orgill::FTPInvalidFilename)
+          .to raise_error(Orgill::FTPInvalidFilenameError)
       end
       
       # it 'output file already exists' # not sure how to test this

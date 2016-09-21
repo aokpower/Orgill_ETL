@@ -29,7 +29,7 @@ end
 module Orgill
   class FTPProtoError < StandardError; end
   class FTPFileNotFoundError < FTPProtoError; end
-  class FTPInvalidFilename < FTPProtoError; end
+  class FTPInvalidFilenameError < FTPProtoError; end
 
   # Use Orgill's FTP server.
   class FTP
