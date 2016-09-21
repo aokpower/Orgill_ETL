@@ -2,3 +2,5 @@
 ign
 .yardoc
 doc
+.env
+doesnt_exist.txt
