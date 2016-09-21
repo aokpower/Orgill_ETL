@@ -70,11 +70,17 @@ module Orgill
       self
     end
 
-    def get_image(image_name)
-      unless is_valid_filename?(image_name)
-        raise FTPInvalidFilename
-      else
-        raise FTPFileNotFoundError
+    # Get an image file. Goes to image folder and downloads specified file.
+    # @param image_name [String] Image file name. ex: '0130104.jpg'
+    # @param output_filename [String] Optional output name. Nil by default.
+    # @note An empty file is written locally even when file isn't found.
+    def get_image(image_name, output_filename=nil)
+      raise FTPInvalidFilenameError unless is_valid_filename?(image_name)
+      chdir_image_folder
+      begin
+        ftp.getbinaryfile(*[image_name, output_filename].compact)
+      rescue Net::FTPPermError
+        raise FTPFileNotFoundError, "#{image_name} was not found"
       end
     end
 
