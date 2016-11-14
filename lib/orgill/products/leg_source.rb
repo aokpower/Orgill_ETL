@@ -49,9 +49,6 @@ module Orgill
       end
 
       class << self
-
-        private
-
         # @param row_separator [String] "\r\n" by default.
         #   Try changing this to "\n" if you are having problems
         def detabularize(string, row_separator = "\r\n")
