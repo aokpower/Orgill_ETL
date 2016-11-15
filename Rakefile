@@ -10,4 +10,24 @@ task :legsource do
   source.each { |p| ap(p) }
 end
 
+task :add_headers_to do
+  require 'csv'
+
+  map    = Orgill::Products::WEB_SKU_COMMON_MAP
+  # transform web_sku_map into in order array of headers
+  headers = []
+  map.size.times do |n|
+    # Can't use #reduce because hashes are order independant.
+    headers << map[n]
+  end
+
+  products = Orgill::Products::LegSource.detabularize(File.read(ARGV[1]))
+
+  CSV.open(ARGV[2], 'w') do |out|
+
+    out << headers
+    products.each { |product| out << product }
+  end
+end
+
 task default: [:legsource]
